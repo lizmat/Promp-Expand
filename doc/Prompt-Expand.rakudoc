@@ -86,22 +86,22 @@ interactive prompt related C<:text> sequences:
 
 =begin table
 
-| escape | :text: | function
-|--------+--------+---------
-| \a     | bell     | audible / visible alert
-| \b     | bksp     | backspace
-| \e     | escape   | initiate ANSI escape sequence
-| \f     | formfeed | form feed (FF)
-| \c     | reset    | reset to all ANSI defaults
-| \n     | lf       | line feed (LF, newline, $?NL)
-| \r     | cr       | Carriage Return (CR)
-| \t     | tab      | tab
-| \\     | bslash   | backslash
-|        | index    | $*INDEX value
-|        | symbol   | $*SYMBOL value
-|        | language | language version
-|        | release  | compiler release
-|        | compiler | compiler version
+| :text:   | escape | function
+-----------+--------+---------
+| bell     | \a     | audible / visible alert
+| bksp     | \b     | backspace
+| escape   | \e     | initiate ANSI escape sequence
+| formfeed | \f     | form feed (FF)
+| reset    | \c     | reset to all ANSI defaults
+| lf       | \n     | line feed (LF, newline, $?NL)
+| cr       | \r     | Carriage Return (CR)
+| tab      | \t     | tab
+| bslash   | \\     | backslash
+| index    |        | $*INDEX value
+| symbol   |        | $*SYMBOL value
+| language |        | language version
+| release  |        | compiler release
+| compiler |        | compiler version
 
 =end table
 

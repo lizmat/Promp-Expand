@@ -57,10 +57,10 @@ Besides most of the [standard Raku escape sequences](https://docs.raku.org/langu
 
 <table class="pod-table">
 <thead><tr>
-<th>escape</th> <th>:text:</th> <th>function</th>
+<th>:text:</th> <th>escape</th> <th>function</th>
 </tr></thead>
 <tbody>
-<tr> <td>\a</td> <td>bell</td> <td>audible / visible alert</td> </tr> <tr> <td>\b</td> <td>bksp</td> <td>backspace</td> </tr> <tr> <td>\e</td> <td>escape</td> <td>initiate ANSI escape sequence</td> </tr> <tr> <td>\f</td> <td>formfeed</td> <td>form feed (FF)</td> </tr> <tr> <td>\c</td> <td>reset</td> <td>reset to all ANSI defaults</td> </tr> <tr> <td>\n</td> <td>lf</td> <td>line feed (LF, newline, $?NL)</td> </tr> <tr> <td>\r</td> <td>cr</td> <td>Carriage Return (CR)</td> </tr> <tr> <td>\t</td> <td>tab</td> <td>tab</td> </tr> <tr> <td>\\</td> <td>bslash</td> <td>backslash</td> </tr> <tr> <td>| index</td> <td>$*INDEX value</td> <td></td> </tr> <tr> <td>| symbol</td> <td>$*SYMBOL value</td> <td></td> </tr> <tr> <td>| language</td> <td>language version</td> <td></td> </tr> <tr> <td>| release</td> <td>compiler release</td> <td></td> </tr> <tr> <td>| compiler</td> <td>compiler version</td> <td></td> </tr>
+<tr> <td>bell</td> <td>\a</td> <td>audible / visible alert</td> </tr> <tr> <td>bksp</td> <td>\b</td> <td>backspace</td> </tr> <tr> <td>escape</td> <td>\e</td> <td>initiate ANSI escape sequence</td> </tr> <tr> <td>formfeed</td> <td>\f</td> <td>form feed (FF)</td> </tr> <tr> <td>reset</td> <td>\c</td> <td>reset to all ANSI defaults</td> </tr> <tr> <td>lf</td> <td>\n</td> <td>line feed (LF, newline, $?NL)</td> </tr> <tr> <td>cr</td> <td>\r</td> <td>Carriage Return (CR)</td> </tr> <tr> <td>tab</td> <td>\t</td> <td>tab</td> </tr> <tr> <td>bslash</td> <td>\\</td> <td>backslash</td> </tr> <tr> <td>index</td> <td></td> <td>$*INDEX value</td> </tr> <tr> <td>symbol</td> <td></td> <td>$*SYMBOL value</td> </tr> <tr> <td>language</td> <td></td> <td>language version</td> </tr> <tr> <td>release</td> <td></td> <td>compiler release</td> </tr> <tr> <td>compiler</td> <td></td> <td>compiler version</td> </tr>
 </tbody>
 </table>
 
