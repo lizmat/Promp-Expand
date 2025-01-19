@@ -1,0 +1,4 @@
+.precomp/
+/Prompt-Expand-*
+/releases/
+*.rakucov

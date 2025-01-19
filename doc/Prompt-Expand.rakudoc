@@ -1,0 +1,185 @@
+=begin pod
+
+=head1 NAME
+
+Prompt::Expand - provide prompt expansion logic
+
+=head1 SYNOPSIS
+
+=begin code :lang<raku>
+
+use Prompt::Expand;
+
+say expand(":time: >");        # 19:24:11 >
+
+say expand(":date: >", "NL");  # zon 19 jan 2025 >
+
+=end code
+
+=head1 DESCRIPTION
+
+The C<Prompt::Expand> distribution provides the logic to expand a string
+(usually intended to be used as a prompt for user input) according to
+number of escape sequences (the format).  As such it exports an C<expand>
+subroutine that takes such a format, and returns the expanded string.
+
+Expansion currently provided are:
+=item ANSI color / formatting codes
+=item strftime escape codes (if DateTime::strftime is installed)
+=item emoji escape codes (if Text::Emoji is installed)
+=item other generally useful escapes
+
+Expansions involving date / time values, can be localized by specifying
+the language to be used, either as a string (e.g. C<"NL">) or as a
+custom L<Locale::Dates> object.
+
+=head1 EXPANSIONS
+
+=head2 ANSI color codes
+
+Note that B<not> all of these are supported everywhere!
+
+=begin table
+
+| :text:        | function
+|---------------+---------
+| normal        | reset to default
+| bold          | switch on bold characters
+| dim           | switch on dimmer characters
+| italic        | switch on italic characters
+| underline     | switch on underlined characters
+| blink         | switch on blinking characters
+| inverse       | switch on inverted characters
+| hidden        | switch on showing spaces instead of characters
+| strikethrough | switch on strikethrough characters
+| unbold        | switch off bold characters
+| unitalic      | switch off italic characters
+| ununderline   | switch off underlined characters
+| uninverse     | switch off inverse characters
+| black         | switch to black foreground
+| red           | switch to red foreground
+| green         | switch to green foreground
+| yellow        | switch to yellow foreground
+| blue          | switch to blue foreground
+| magenta       | switch to magenta foreground
+| cyan          | switch to cyan foreground
+| white         | switch to white foreground
+| default       | switch to default foreground
+| BLACK         | switch to black background
+| RED           | switch to red background
+| GREEN         | switch to green background
+| YELLOW        | switch to yellow background
+| BLUE          | switch to blue background
+| MAGENTA       | switch to magenta background
+| CYAN          | switch to cyan background
+| WHITE         | switch to white background
+| DEFAULT       | switch to default background
+
+=end table
+
+=head2 Raku escape sequences
+
+Besides most of the
+L<standard Raku escape sequences|https://docs.raku.org/language/quoting#Interpolating_escape_codes>
+with an associated C<:text:> equivalent, also some other more
+interactive prompt related C<:text> sequences:
+
+=begin table
+
+| escape | :text: | function
+|--------+--------+---------
+| \a     | bell     | audible / visible alert
+| \b     | bksp     | backspace
+| \e     | escape   | initiate ANSI escape sequence
+| \f     | formfeed | form feed (FF)
+| \c     | reset    | reset to all ANSI defaults
+| \n     | lf       | line feed (LF, newline, $?NL)
+| \r     | cr       | Carriage Return (CR)
+| \t     | tab      | tab
+| \\     | bslash   | backslash
+|        | index    | $*INDEX value
+|        | symbol   | $*SYMBOL value
+|        | language | language version
+|        | release  | compiler release
+|        | compiler | compiler version
+
+=end table
+
+If the L<C<DateTime::strftime>|https://raku.land/zef:lizmat/DateTime::strftime>
+is installed:
+
+=begin table
+
+| Code | :text:      | Value
+|------|-------------+------
+| %a   | wkdname     | abbreviated weekday name
+| %A   | weekdayname | full weekday name
+| %b   | mnthname    | abbreviated month name
+| %B   | monthname   | full month name
+| %c   | datetime    | preferred date/time representation
+| %C   | century     | century number (year div 100)
+| %d   | 0day        | day of month ("01" .. "31")
+| %D   | usadate     | short for: %m/%d/%y
+| %e   | day         | day of month (" 1" .. "31")
+| %f   |             | same as %M
+| %F   | isodate     | short for: %Y/%m/%d
+| %g   | weekYY      | YY of this week ("00" .. "99")
+| %G   | weekYYYY    | full year of this week
+| %h   |             | same as %b
+| %H   | 0hour       | 24-hour hour ("00" .. "23")
+| %I   | 0amhour     | 12-hour hour ("01" .. "12")
+| %j   | yearday     | day of the year ("001" .. "366")
+| %k   | hour        | 24-hour hour (" 1" .. "23")
+| %l   | amhour      | 12-hour hour (" 1" .. "12")
+| %L   |             | same as %Y
+| %m   | month       | month ("01" .. "12")
+| %M   | minute      | minute ("00" .. "59")
+| %n   | newline     | "\n"
+| %p   | AMPM        | "AM" \| "PM"
+| %P   | ampm        | "am" \| "pm"
+| %r   | amtime      | short for: %I:%M:%S %p
+| %R   | HHMM        | short for: %H:%M
+| %s   | epoch       | seconds since epoch (midnight 1970-01-01 UTC)
+| %S   | second      | second ("00" .. "59")
+| %t   | tab         | "\t"
+| %T   | HHMMSS      | short for: %H:%M:%S
+| %u   | weekday     | weekday (1 .. 7)
+| %U   | weekSun     | week number (first Sunday) ("00" .. "53")
+| %v   | DD-MON-YYYY | short for: %e-%b-%Y
+| %V   | weekISO     | week number (ISO 8601) ("00" .. "53")
+| %w   | 0weekday    | weekday (0 .. 6)
+| %W   | weekMon     | week number (first Monday) ("00" .. "53")
+| %x   | date        | preferred date representation
+| %X   | time        | preferred time representation
+| %y   | YY          | year without century ("00" .. "99")
+| %Y   | year        | year (yyyy)
+| %z   | tzoffset    | numeric timezone (±HHMM)
+| %Z   | timezone    | timezone (no name: %z)
+| %+   | unixdate    | short for: %a %b %e %T %Z %G
+| %%   | percent     | "%"
+
+=end table
+
+If the L<C<Text::Emoji>|https://raku.land/zef:lizmat/Text::Emoji>, all
+of the I<1870> conversions are supported.
+
+=head1 AUTHOR
+
+Elizabeth Mattijsen <liz@raku.rocks>
+
+Source can be located at: https://github.com/lizmat/Prompt-Expand .
+Comments and Pull Requests are welcome.
+
+If you like this module, or what I'm doing more generally, committing to a
+L<small sponsorship|https://github.com/sponsors/lizmat/>  would mean a great
+deal to me!
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2025 Elizabeth Mattijsen
+
+This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
+
+=end pod
+
+# vim: expandtab shiftwidth=4

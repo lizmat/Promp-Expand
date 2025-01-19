@@ -1,0 +1,30 @@
+use Test;
+use Prompt::Expand;
+
+my $release  = $*RAKU.compiler.version.Str.substr(0,7);
+my $compiler = $*RAKU.compiler.version.gist;
+my $language = $*RAKU.version.Str;
+
+my $*INDEX  = 42;
+my $*SYMBOL = "⚛️";
+
+plan 9;
+
+is expand(':release:'),  $release,    'is :release: ok';
+is expand(':compiler:'), $compiler,   'is :compiler: ok';
+is expand(':language:'), $language,   'is :language: ok';
+is expand(':index:'),    $*INDEX,     'is :index: ok';
+is expand(':symbol:'),   $*SYMBOL,    'is :symbol: ok';
+is expand(':unknown:'),  ':unknown:', 'is :unknown: ok';
+
+is expand('\a\b\f\n\r\t\\'), "\a\b\f\n\r\t\\",
+  "are standard escape sequences ok";
+is expand(':bell::bksp::formfeed::lf::cr::tab::bslash:'),
+  "\a\b\f\n\r\t\\",
+  "are standard escape sequences as :text: ok";
+
+is expand(':bold:foo::unbold:bar'),
+  "\x[1B][1mfoo:\x[1B][22mbar",
+  'simple ANSI sequence';
+
+# vim: expandtab shiftwidth=4

@@ -1,0 +1,28 @@
+{
+  "auth": "zef:lizmat",
+  "authors": [
+    "Elizabeth Mattijsen"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "provide prompt expansion logic",
+  "license": "Artistic-2.0",
+  "name": "Prompt::Expand",
+  "perl": "6.d",
+  "provides": {
+    "Prompt::Expand": "lib/Prompt/Expand.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "https://github.com/lizmat/Promp-Expand.git",
+  "tags": [
+    "PROMPT",
+    "COLOR",
+    "STRFTIME"
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.1"
+}
