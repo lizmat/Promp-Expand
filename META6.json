@@ -6,6 +6,8 @@
   "build-depends": [
   ],
   "depends": [
+    "DateTime::strftime:ver<0.0.2+>:auth<zef:lizmat>",
+    "Text::Emoji:ver<0.0.7+>:auth<zef:lizmat>"
   ],
   "description": "provide prompt expansion logic",
   "license": "Artistic-2.0",

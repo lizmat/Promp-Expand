@@ -1,6 +1,9 @@
 Revision history for Prompt::Expand
 
 {{$NEXT}}
+    - Add DateTime::strftime and Text::Emoji as hard dependencies
+      for now: strange serialization errors when using in another
+      module that feel like needing to be solved in RakuAST.
 
 0.0.1  2025-01-19T23:08:04+01:00
     - Initial version

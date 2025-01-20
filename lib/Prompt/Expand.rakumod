@@ -1,14 +1,5 @@
-# Attempt to get strftime support at compile time
-my &strftime = try q:to/CODE/.EVAL;
 use DateTime::strftime:ver<0.0.2+>:auth<zef:lizmat>;
-&strftime
-CODE
-
-# Attempt to get emoji support at compile time
-my &to-emoji = try q:to/CODE/.EVAL;
 use Text::Emoji:ver<0.0.7+>:auth<zef:lizmat>;
-&to-emoji
-CODE
 
 # These don't change over the lifetime of a process
 my $release  = $*RAKU.compiler.version.Str.substr(0,7);

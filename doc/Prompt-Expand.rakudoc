@@ -25,8 +25,8 @@ subroutine that takes such a format, and returns the expanded string.
 
 Expansion currently provided are:
 =item ANSI color / formatting codes
-=item strftime escape codes (if DateTime::strftime is installed)
-=item emoji escape codes (if Text::Emoji is installed)
+=item strftime escape codes
+=item emoji escape codes
 =item other generally useful escapes
 
 Expansions involving date / time values, can be localized by specifying
