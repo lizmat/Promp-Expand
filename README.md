@@ -25,9 +25,9 @@ Expansion currently provided are:
 
   * ANSI color / formatting codes
 
-  * strftime escape codes (if DateTime::strftime is installed)
+  * strftime escape codes
 
-  * emoji escape codes (if Text::Emoji is installed)
+  * emoji escape codes
 
   * other generally useful escapes
 
