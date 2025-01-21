@@ -1,6 +1,8 @@
 Revision history for Prompt::Expand
 
 {{$NEXT}}
+
+0.0.3  2025-01-21T21:32:58+01:00
     - Expand placeholder definitions to be a comma-separated list
       of identifiers
 
