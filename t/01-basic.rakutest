@@ -8,7 +8,7 @@ my $language = $*RAKU.version.Str;
 my $*INDEX  = 42;
 my $*SYMBOL = "⚛️";
 
-plan 9;
+plan 10;
 
 is expand(':release:'),  $release,    'is :release: ok';
 is expand(':compiler:'), $compiler,   'is :compiler: ok';
@@ -16,6 +16,9 @@ is expand(':language:'), $language,   'is :language: ok';
 is expand(':index:'),    $*INDEX,     'is :index: ok';
 is expand(':symbol:'),   $*SYMBOL,    'is :symbol: ok';
 is expand(':unknown:'),  ':unknown:', 'is :unknown: ok';
+
+is expand(':release,unknown:'), "$release\:unknown:",
+  'is :release,unknown: ok';
 
 is expand('\a\b\f\n\r\t\\'), "\a\b\f\n\r\t\\",
   "are standard escape sequences ok";

@@ -78,10 +78,29 @@ my sub expand(
 
     my $*INDEX  := $index;
     my $*SYMBOL := $symbol;
-    $format = $format.subst(/ [ '\\' \w ] | [ ':' <[\w-]>+ ':' ] /, {
+    $format = $format.subst(/ [ '\\' \w ] | [ ':' <[\w,-]>+ ':' ] /, {
+
+        # Direct specification
         if %dispatch{$_} -> $to {
             $to ~~ Callable ?? $to() !! $to
         }
+
+        # Possible multiple specs
+        elsif .contains(",") {
+            my str @parts;
+            for .substr(1, *-1).split(",", :skip-empty) {
+                my $needle := ":$_:";
+                if %dispatch{$needle} -> $to {
+                    @parts.push: $to ~~ Callable ?? $to() !! $to
+                }
+                else {
+                    @parts.push: $needle;
+                }
+            }
+            @parts.join
+        }
+
+        # huh?
         else {
             .Str
         }

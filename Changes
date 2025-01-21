@@ -1,6 +1,8 @@
 Revision history for Prompt::Expand
 
 {{$NEXT}}
+    - Expand placeholder definitions to be a comma-separated list
+      of identifiers
 
 0.0.2  2025-01-20T19:06:22+01:00
     - Add DateTime::strftime and Text::Emoji as hard dependencies

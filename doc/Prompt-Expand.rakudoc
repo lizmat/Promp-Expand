@@ -10,9 +10,9 @@ Prompt::Expand - provide prompt expansion logic
 
 use Prompt::Expand;
 
-say expand(":time: >");        # 19:24:11 >
+say expand(":time: >");                     # 19:24:11 >
 
-say expand(":date: >", "NL");  # zon 19 jan 2025 >
+say expand(":yellow,date,reset: >", "NL");  # zon 19 jan 2025 >
 
 =end code
 
@@ -20,8 +20,13 @@ say expand(":date: >", "NL");  # zon 19 jan 2025 >
 
 The C<Prompt::Expand> distribution provides the logic to expand a string
 (usually intended to be used as a prompt for user input) according to
-number of escape sequences (the format).  As such it exports an C<expand>
-subroutine that takes such a format, and returns the expanded string.
+number of escape sequences (C<\x>) or placeholder specifications C<:text:>.
+As such it exports an C<expand> subroutine that takes such a format, and
+returns the expanded string.
+
+Placeholders are specified by an initial semi-colon (C<:>), followed
+by one or more identifiers separated by commas, and ended with a final
+semi-colon.
 
 Expansion currently provided are:
 =item ANSI color / formatting codes
@@ -105,8 +110,7 @@ interactive prompt related C<:text> sequences:
 
 =end table
 
-If the L<C<DateTime::strftime>|https://raku.land/zef:lizmat/DateTime::strftime>
-is installed:
+From L<C<DateTime::strftime>|https://raku.land/zef:lizmat/DateTime::strftime>:
 
 =begin table
 
@@ -121,17 +125,17 @@ is installed:
 | %d   | 0day        | day of month ("01" .. "31")
 | %D   | usadate     | short for: %m/%d/%y
 | %e   | day         | day of month (" 1" .. "31")
-| %f   |             | same as %M
+| %f   | minute      | same as %M
 | %F   | isodate     | short for: %Y/%m/%d
 | %g   | weekYY      | YY of this week ("00" .. "99")
 | %G   | weekYYYY    | full year of this week
-| %h   |             | same as %b
+| %h   | mnthname    | same as %b
 | %H   | 0hour       | 24-hour hour ("00" .. "23")
 | %I   | 0amhour     | 12-hour hour ("01" .. "12")
 | %j   | yearday     | day of the year ("001" .. "366")
 | %k   | hour        | 24-hour hour (" 1" .. "23")
 | %l   | amhour      | 12-hour hour (" 1" .. "12")
-| %L   |             | same as %Y
+| %L   | year        | same as %Y
 | %m   | month       | month ("01" .. "12")
 | %M   | minute      | minute ("00" .. "59")
 | %n   | newline     | "\n"
@@ -160,7 +164,7 @@ is installed:
 
 =end table
 
-If the L<C<Text::Emoji>|https://raku.land/zef:lizmat/Text::Emoji>, all
+From L<C<Text::Emoji>|https://raku.land/zef:lizmat/Text::Emoji>, all
 of the I<1870> conversions are supported.
 
 =head1 AUTHOR
